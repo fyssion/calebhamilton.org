@@ -13,7 +13,7 @@ cfg_if! {
         let channel = ChannelBuilder::default()
             .title("Fyssion's blog")
             .link("https://fyssion.zone/blog/")
-            .description("Thoughts and reflections without thinking nor reflecting")
+            .description("Thoughts and reflections without thinking or reflecting")
             .language(Some("en-us".to_owned()))
             .copyright(Some("Copyright 2023-present Fyssion".to_owned()))
             .managing_editor(Some("fyssioncodes@gmail.com".to_owned()))

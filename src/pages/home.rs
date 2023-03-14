@@ -1,10 +1,11 @@
 use leptos::*;
-use leptos_meta::*;
+use crate::utils::page_meta::{PageMeta, PageMetaProps};
 
 #[component]
 pub fn Home(cx: Scope) -> impl IntoView {
     view! { cx,
-        <Title text="fyssion's zone"/>
+        <PageMeta title="fyssion's zone" description="Fyssion's personal website" />
+
         <h1>"Welcome"</h1>
         <p>"I'm Fyssion. I enjoy writing software."</p>
 

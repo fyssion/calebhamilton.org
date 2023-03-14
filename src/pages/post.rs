@@ -3,6 +3,7 @@ use leptos_meta::*;
 use leptos_router::*;
 
 use crate::utils::{errors::PostError, post::get_post};
+use crate::utils::page_meta::{PageMeta, PageMetaProps};
 
 #[component]
 fn SkeletonPost(cx: Scope) -> impl IntoView {
@@ -66,8 +67,13 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
                     // since we're using async rendering for this page,
                     // this metadata should be included in the actual HTML <head>
                     // when it's first served
-                    <Title text={format!("{} - fyssion's blog", post.metadata.title)}/>
-                    <Meta name="description" content=post.metadata.description/>
+                    // <Title text={format!("{} - fyssion's blog", post.metadata.title)}/>
+                    // <Meta name="description" content=post.metadata.description/>
+                    <PageMeta title={format!("{} - fyssion's blog", post.metadata.title)} description=post.metadata.description>
+                        <Meta name="og:type" content="article"/>
+                        <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
+                    </PageMeta>
+
                 }
             })
         })

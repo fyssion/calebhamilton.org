@@ -20,6 +20,8 @@ pub fn App(cx: Scope) -> impl IntoView {
     view! {
         cx,
 
+        <Html lang="en" />
+
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/fyssion_zone.css"/>

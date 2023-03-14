@@ -1,6 +1,6 @@
 use leptos::*;
-use leptos_meta::*;
 
+use crate::utils::page_meta::{PageMeta, PageMetaProps};
 use crate::utils::post::get_post_metadata;
 
 #[component]
@@ -43,7 +43,8 @@ pub fn Blog(cx: Scope) -> impl IntoView {
     };
 
     view! { cx,
-        <Title text="fyssion's blog"/>
+        <PageMeta title="fyssion's blog" description="Thoughts and reflections without thinking or reflecting" />
+
         <h1>"Blog"</h1>
         <p>"An RSS feed for this blog is available "<a target="_blank" href="/blog/feed.rss">"here"</a>"."</p>
         <Suspense fallback=move || view! { cx,
