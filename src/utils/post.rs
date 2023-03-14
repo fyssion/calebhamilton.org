@@ -1,8 +1,8 @@
 use cfg_if::cfg_if;
 use comrak::{ComrakExtensionOptions, ComrakOptions};
 use lazy_static::lazy_static;
-use serde::{Serialize, Deserialize};
 use leptos::*;
+use serde::{Deserialize, Serialize};
 
 lazy_static! {
     static ref COMRAK_OPTIONS: ComrakOptions = ComrakOptions {
@@ -123,8 +123,12 @@ pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
             let content = comrak::markdown_to_html(&p, &COMRAK_OPTIONS);
             let posts = get_post_metadata().await?;
             let metadata = posts.iter().find(|m| m.id == id).unwrap().clone();
-            Some(Post { id, content, metadata })
-        },
+            Some(Post {
+                id,
+                content,
+                metadata,
+            })
+        }
         Err(_) => None,
     };
     Ok(post)

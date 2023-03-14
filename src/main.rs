@@ -1,16 +1,20 @@
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
+    use axum::{
+        extract::Extension,
+        routing::{get, post},
+        Router,
+    };
+    use fyssion_zone::app::*;
+    use fyssion_zone::pages::fallback::file_and_error_handler;
+    use fyssion_zone::pages::feed::feed;
+    use fyssion_zone::utils::post::{GetPost, GetPostMetadata};
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
-    use axum::{extract::{Extension}, Router, routing::{get, post}};
-    use tower_http::{trace::TraceLayer};
-    use tower::ServiceBuilder;
     use std::sync::Arc;
-    use fyssion_zone::app::*;
-    use fyssion_zone::utils::post::{GetPost, GetPostMetadata};
-    use fyssion_zone::pages::feed::feed;
-    use fyssion_zone::pages::fallback::file_and_error_handler;
+    use tower::ServiceBuilder;
+    use tower_http::trace::TraceLayer;
 
     let conf = get_configuration(None).await.unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -29,7 +33,7 @@ async fn main() {
         .layer(
             ServiceBuilder::new()
                 .layer(Extension(Arc::new(leptos_options)))
-                .layer(TraceLayer::new_for_http())
+                .layer(TraceLayer::new_for_http()),
         );
 
     // run our app with hyper

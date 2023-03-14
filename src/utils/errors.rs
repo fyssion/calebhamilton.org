@@ -1,6 +1,6 @@
 use std::fmt::{Display, Result};
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 #[derive(Debug)]
@@ -37,7 +37,6 @@ impl From<std::string::FromUtf8Error> for LoadingError {
         LoadingError::Encoding(error)
     }
 }
-
 
 #[derive(Error, Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum PostError {

@@ -17,28 +17,29 @@ fn SkeletonPost(cx: Scope) -> impl IntoView {
 
 #[component]
 pub fn Blog(cx: Scope) -> impl IntoView {
-    let posts =
-        create_resource(cx, || (), |_| async { get_post_metadata().await });
+    let posts = create_resource(cx, || (), |_| async { get_post_metadata().await });
     let posts_view = move || {
-        posts.with(cx, |posts| posts
-            .clone()
-            .map(|posts| {
-                posts.iter()
-                .filter(|p| p.hidden == false)
-                .map(|post| view! { cx,
-                    <li>
-                        <a href=format!("/blog/post/{}", post.id)>
-                            <h2>{&post.title}</h2>
-                        </a>
-                        <h3>{
-                            &post.created_at.format("%b %e, %Y").to_string()
-                        }</h3>
-                        <p>{&post.description}</p>
-                    </li>
-                })
-                .collect::<Vec<_>>()
+        posts.with(cx, |posts| {
+            posts.clone().map(|posts| {
+                posts
+                    .iter()
+                    .filter(|p| p.hidden == false)
+                    .map(|post| {
+                        view! { cx,
+                            <li>
+                                <a href=format!("/blog/post/{}", post.id)>
+                                    <h2>{&post.title}</h2>
+                                </a>
+                                <h3>{
+                                    &post.created_at.format("%b %e, %Y").to_string()
+                                }</h3>
+                                <p>{&post.description}</p>
+                            </li>
+                        }
+                    })
+                    .collect::<Vec<_>>()
             })
-        )
+        })
     };
 
     view! { cx,

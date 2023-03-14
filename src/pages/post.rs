@@ -28,7 +28,9 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
     let query = use_params::<BlogPostParams>(cx);
     let id = move || {
         query.with(|q| {
-            q.as_ref().map(|q| q.id.clone()).map_err(|_| PostError::InvalidTitle)
+            q.as_ref()
+                .map(|q| q.id.clone())
+                .map_err(|_| PostError::InvalidTitle)
         })
     };
     let post = create_resource(cx, id, |id| async move {
@@ -37,7 +39,10 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
             Ok(id) => get_post(id.clone())
                 .await
                 .map(|data| data.ok_or(PostError::PostNotFound))
-                .map_err(|e| {log!("{:?}", e); PostError::ServerError})
+                .map_err(|e| {
+                    log!("{:?}", e);
+                    PostError::ServerError
+                })
                 .flatten(),
         }
     });
@@ -89,4 +94,3 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
         </Suspense>
     }
 }
-
