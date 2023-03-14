@@ -1,7 +1,7 @@
 # fyssion.zone
 
 My personal website written in Rust using [Leptos][leptos].
-See [my blog post](https://fyssion.zone/blog/post/making_a_blog) for further reading.
+<!-- See [my blog post](https://fyssion.zone/blog/post/making_a_blog) for further reading. -->
 
 ## License
 
