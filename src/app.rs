@@ -35,6 +35,10 @@ pub fn App(cx: Scope) -> impl IntoView {
         <Meta name="msapplication-TileColor" content="#EB9486" />
         <Meta name="theme-color" content="#EB9486" />
 
+        // hljs
+        <Link rel="stylesheet"  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css" />
+        <Script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" />
+
         //  TODO: add real error handling
         <Router fallback=move |cx| {view!{ cx, <NotFound />}.into_view(cx)}>
         <div class="app">

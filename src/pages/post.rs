@@ -74,6 +74,8 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
                         <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
                     </PageMeta>
 
+                    // need to do this after post loads
+                    <script>"hljs.highlightAll();"</script>
                 }
             })
         })
