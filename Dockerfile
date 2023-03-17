@@ -1,10 +1,35 @@
 # syntax=docker/dockerfile:1
 
-FROM rustlang/rust:nightly AS prepare
+# Modified from
+# https://github.com/rust-lang/docker-rust-nightly/blob/3a50bf3769500fcdad5aadc68f280d45fdf4075d/debian/Dockerfile
+# for rust nightly 2023-03-15
+FROM buildpack-deps:buster AS rust-nightly
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
+
+RUN set -eux; \
+    dpkgArch="$(dpkg --print-architecture)"; \
+    case "${dpkgArch##*-}" in \
+        amd64) rustArch='x86_64-unknown-linux-gnu' ;; \
+        arm64) rustArch='aarch64-unknown-linux-gnu' ;; \
+        *) echo >&2 "unsupported architecture: ${dpkgArch}"; exit 1 ;; \
+    esac; \
+    \
+    url="https://static.rust-lang.org/rustup/dist/${rustArch}/rustup-init"; \
+    wget "$url"; \
+    chmod +x rustup-init; \
+    ./rustup-init -y --no-modify-path --default-toolchain nightly-2023-03-15; \
+    rm rustup-init; \
+    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
+    rustup --version; \
+    cargo --version; \
+    rustc --version;
+
+FROM rust-nightly AS builder
 RUN rustup target add wasm32-unknown-unknown
 RUN cargo install cargo-leptos
 
-FROM prepare AS builder
 COPY Cargo.toml Cargo.lock ./
 COPY . .
 RUN cargo leptos build --release
