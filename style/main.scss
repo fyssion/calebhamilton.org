@@ -16,7 +16,8 @@
 	// --color-text: #F9F8F8;
 	// --color-text: rgba(249, 248, 248, 1);
 	// --color-text: rgb(220, 220, 220);
-	--color-text: rgb(255, 255, 255);
+	--color-text: rgb(240, 240, 240);
+	--color-text-content: rgb(220, 220, 220);
 	--color-text-muted: rgba(220, 220, 220, 0.65);
 	--color-theme-1: #EB9486;
 	// --color-theme-1: #C65B7C;
@@ -222,6 +223,10 @@ main {
 	max-width: 40rem;
 	margin: 0 auto;
 	box-sizing: border-box;
+
+	p, a {
+		color: var(--color-text-content);
+	}
 }
 
 .container {
