@@ -2,7 +2,6 @@
 #[tokio::main]
 async fn main() {
     use axum::{
-        extract::Extension,
         routing::{get, post},
         Router,
     };
@@ -12,7 +11,6 @@ async fn main() {
     use fyssion_zone::utils::post::{GetPost, GetPostMetadata};
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
-    use std::sync::Arc;
     use tower::ServiceBuilder;
     use tower_http::trace::TraceLayer;
 
@@ -22,17 +20,14 @@ async fn main() {
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(|cx| view! { cx, <App/> }).await;
 
-    let _ = GetPost::register();
-    let _ = GetPostMetadata::register();
-
     let app = Router::new()
         .route("/api/*fn_name", post(leptos_axum::handle_server_fns))
-        .leptos_routes(leptos_options.clone(), routes, |cx| view! { cx, <App/> })
+        .leptos_routes(&leptos_options, routes, |cx| view! { cx, <App/> })
         .route("/blog/feed.rss", get(feed))
         .fallback(file_and_error_handler)
+        .with_state(leptos_options)
         .layer(
             ServiceBuilder::new()
-                .layer(Extension(Arc::new(leptos_options)))
                 .layer(TraceLayer::new_for_http()),
         );
 
