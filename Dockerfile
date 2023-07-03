@@ -2,7 +2,7 @@
 
 # Modified from
 # https://github.com/rust-lang/docker-rust-nightly/blob/3a50bf3769500fcdad5aadc68f280d45fdf4075d/debian/Dockerfile
-# for rust nightly 2023-03-15
+# for rust nightly 2023-07-01
 FROM buildpack-deps:buster AS rust-nightly
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -19,7 +19,7 @@ RUN set -eux; \
     url="https://static.rust-lang.org/rustup/dist/${rustArch}/rustup-init"; \
     wget "$url"; \
     chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --default-toolchain nightly-2023-03-15; \
+    ./rustup-init -y --no-modify-path --default-toolchain nightly-2023-07-01; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
