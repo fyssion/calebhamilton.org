@@ -8,7 +8,6 @@ async fn main() {
     use fyssion_zone::app::*;
     use fyssion_zone::pages::fallback::file_and_error_handler;
     use fyssion_zone::pages::feed::feed;
-    use fyssion_zone::utils::post::{GetPost, GetPostMetadata};
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use tower::ServiceBuilder;

@@ -3,7 +3,7 @@ use leptos_meta::*;
 use leptos_router::*;
 
 use crate::utils::{errors::PostError, post::get_post};
-use crate::utils::page_meta::{PageMeta, PageMetaProps};
+use crate::utils::page_meta::{PageMeta};
 
 #[component]
 fn SkeletonPost(cx: Scope) -> impl IntoView {
