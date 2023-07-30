@@ -33,6 +33,7 @@ rss = { version = "2.0.2", features = ["chrono"], optional = true }
 axum = { version = "0.6.1", optional = true }
 tower = { version = "0.4.13", optional = true }
 tower-http = { version = "0.4", features = ["fs", "trace"], optional = true }
+tracing-subscriber = { version = "0.3", optional = true }
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
@@ -46,6 +47,7 @@ ssr = [
   "leptos_router/ssr",
   "dep:tokio",
   "dep:rss",
+  "dep:tracing-subscriber",
 ]
 
 [package.metadata.leptos]
