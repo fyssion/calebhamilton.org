@@ -58,7 +58,19 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
                         <h3>
                             {&post.metadata.created_at.format("%b %e, %Y").to_string()}
                             " • "
-                            {words_count::count(&post.content).words}
+                            {
+                                // determine word count and separate with commas
+                                // clever separation solution from https://stackoverflow.com/a/67834588
+                                words_count::count(&post.content).words
+                                .to_string()
+                                .as_bytes()
+                                .rchunks(3)
+                                .rev()
+                                .map(std::str::from_utf8)
+                                .collect::<Result<Vec<&str>, _>>()
+                                .unwrap()
+                                .join(",")
+                            }
                             " words"
                         </h3>
                         <section inner_html={&post.content} />
