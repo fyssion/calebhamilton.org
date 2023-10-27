@@ -227,7 +227,6 @@ main {
 
 	p, a, li {
 		color: var(--color-text-content);
-		line-height: var(--font-line-height);
 	}
 }
 
@@ -286,6 +285,10 @@ article {
 	.footnotes {
 		font-size: 0.88rem;
 		color: var(--color-text-muted);
+	}
+
+	li {
+		line-height: var(--font-line-height);
 	}
 }
 
