@@ -1,5 +1,5 @@
-use leptos::*;
 use crate::utils::page_meta::PageMeta;
+use leptos::*;
 
 #[component]
 pub fn About(cx: Scope) -> impl IntoView {

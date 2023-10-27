@@ -32,10 +32,7 @@ async fn main() {
         .route("/blog/feed.rss", get(feed))
         .fallback(file_and_error_handler)
         .with_state(leptos_options)
-        .layer(
-            ServiceBuilder::new()
-                .layer(TraceLayer::new_for_http()),
-        );
+        .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`

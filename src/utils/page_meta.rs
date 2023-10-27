@@ -4,13 +4,10 @@ use leptos_meta::*;
 #[component]
 pub fn PageMeta(
     cx: Scope,
-    #[prop(into)]
-    title: TextProp,
-    #[prop(into)]
-    description: TextProp,
+    #[prop(into)] title: TextProp,
+    #[prop(into)] description: TextProp,
     // idk wtf i'm doing
-    #[prop(default = Box::new(|s| Fragment::new(Vec::new()) ) )]
-    children: Children
+    #[prop(default = Box::new(|s| Fragment::new(Vec::new()) ) )] children: Children,
 ) -> impl IntoView {
     view! { cx,
         <Title text={title.clone()}/>
