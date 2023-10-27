@@ -3,11 +3,11 @@ use leptos_meta::*;
 use leptos_router::*;
 
 use crate::pages::{
-    blog::{Blog},
-    home::{Home},
-    not_found::{NotFound},
-    // about::{AboutProps, About},
-    post::{BlogPost},
+    blog::Blog,
+    home::Home,
+    not_found::NotFound,
+    // about::About,
+    post::BlogPost,
 };
 
 static SITE_TITLE: &'static str = "fyssion's zone";

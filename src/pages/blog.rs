@@ -1,6 +1,6 @@
 use leptos::*;
 
-use crate::utils::page_meta::{PageMeta};
+use crate::utils::page_meta::PageMeta;
 use crate::utils::post::get_post_metadata;
 
 #[component]
