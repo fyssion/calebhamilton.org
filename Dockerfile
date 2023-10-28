@@ -28,7 +28,7 @@ RUN set -eux; \
 
 FROM rust-nightly AS builder
 RUN rustup target add wasm32-unknown-unknown
-RUN cargo install cargo-leptos
+RUN cargo install cargo-leptos@0.2.0
 
 COPY Cargo.toml Cargo.lock ./
 COPY . .
@@ -37,7 +37,7 @@ RUN cargo leptos build --release
 FROM debian:buster-slim
 COPY ./posts /usr/local/share/fyssion_zone/posts
 COPY --from=builder ./target/site /usr/local/share/fyssion_zone/site
-COPY --from=builder ./target/server/release/fyssion_zone /usr/local/bin/fyssion_zone
+COPY --from=builder ./target/release/fyssion_zone /usr/local/bin/fyssion_zone
 WORKDIR /usr/local/share/fyssion_zone
 ENV LEPTOS_OUTPUT_NAME="fyssion_zone"
 ENV LEPTOS_SITE_ADDR="0.0.0.0:3000"
