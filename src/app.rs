@@ -38,6 +38,8 @@ pub fn App(cx: Scope) -> impl IntoView {
         // hljs
         <Link rel="stylesheet"  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css" />
         <Script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" />
+        <Link rel="preconnect" href="https://rsms.me/" />
+        <Link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
         //  TODO: add real error handling
         <Router fallback=move |cx| {view!{ cx, <NotFound />}.into_view(cx)}>
