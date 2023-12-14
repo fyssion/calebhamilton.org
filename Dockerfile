@@ -28,7 +28,7 @@ RUN set -eux; \
 
 FROM rust-nightly AS builder
 RUN rustup target add wasm32-unknown-unknown
-RUN cargo install cargo-leptos@0.2.0
+RUN cargo install --locked cargo-leptos@0.2.0
 
 COPY Cargo.toml Cargo.lock ./
 COPY . .
