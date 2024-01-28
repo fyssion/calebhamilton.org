@@ -33,6 +33,7 @@ cfg_if! {
                                     .permalink(true)
                                     .build()
                             ) // TODO: add post content (requires some code restructuring)
+                            .pub_date(Some(p.created_at.to_rfc2822()))
                             .build()
                     })
                     .collect::<Vec<_>>()
