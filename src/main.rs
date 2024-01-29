@@ -10,6 +10,7 @@ async fn main() {
     use fyssion_zone::pages::feed::feed;
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
+    use leptos::logging::log;
     use tower::ServiceBuilder;
     use tower_http::trace::TraceLayer;
 
@@ -17,7 +18,7 @@ async fn main() {
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
-    let routes = generate_route_list(|cx| view! { cx, <App/> }).await;
+    let routes = generate_route_list(|| view! { <App/> });
 
     // init logging
     if std::env::var("RUST_LOG").is_err() {
@@ -52,7 +53,7 @@ async fn main() {
     //         .leptos_routes(
     //             leptos_options.to_owned(),
     //             routes.to_owned(),
-    //             |cx| view! { cx, <App/> },
+    //             || view! { <App/> },
     //         )
     //         .service(Files::new("/", site_root))
     //     //.wrap(middleware::Compress::default())

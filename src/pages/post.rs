@@ -1,13 +1,14 @@
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+use leptos::logging::log;
 
 use crate::utils::page_meta::PageMeta;
 use crate::utils::{errors::PostError, post::get_post};
 
 #[component]
-fn SkeletonPost(cx: Scope) -> impl IntoView {
-    view! { cx,
+fn SkeletonPost() -> impl IntoView {
+    view! {
         <div class="skeleton-card-full title">
             <div class="skeleton skeleton-header title"></div>
             <div class="skeleton skeleton-text skeleton-details"></div>
@@ -25,8 +26,8 @@ pub struct BlogPostParams {
 }
 
 #[component]
-pub fn BlogPost(cx: Scope) -> impl IntoView {
-    let query = use_params::<BlogPostParams>(cx);
+pub fn BlogPost() -> impl IntoView {
+    let query = use_params::<BlogPostParams>();
     let id = move || {
         query.with(|q| {
             q.as_ref()
@@ -34,7 +35,7 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
                 .map_err(|_| PostError::InvalidTitle)
         })
     };
-    let post = create_resource(cx, id, |id| async move {
+    let post = create_resource(id, |id| async move {
         match id {
             Err(e) => Err(e),
             Ok(id) => get_post(id.clone())
@@ -49,9 +50,9 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
     });
 
     let post_view = move || {
-        post.with(cx, |post| {
+        post.map(|post| {
             post.clone().map(|post| {
-                view! { cx,
+                view! {
                         <article>
                         // render content
                         <h1 class="title">{&post.metadata.title}</h1>
@@ -81,10 +82,9 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
                     // when it's first served
                     // <Title text={format!("{} - fyssion's blog", post.metadata.title)}/>
                     // <Meta name="description" content=post.metadata.description/>
-                    <PageMeta title={format!("{} - fyssion's blog", post.metadata.title)} description=post.metadata.description>
-                        <Meta name="og:type" content="article"/>
-                        <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
-                    </PageMeta>
+                    <PageMeta title={format!("{} - fyssion's blog", post.metadata.title)} description=post.metadata.description />
+                    <Meta name="og:type" content="article"/>
+                    <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
 
                     // need to do this after post loads
                     <script>"hljs.highlightAll();"</script>
@@ -93,16 +93,16 @@ pub fn BlogPost(cx: Scope) -> impl IntoView {
         })
     };
 
-    view! { cx,
-        <Suspense fallback=move || view! { cx, <SkeletonPost /> }>
-            <ErrorBoundary fallback=|cx, errors| {
-                view! { cx,
+    view! {
+        <Suspense fallback=move || view! { <SkeletonPost /> }>
+            <ErrorBoundary fallback=|errors| {
+                view! {
                     <div class="error">
                         <h1>"Aw shucks"</h1>
                         <ul>
                         {move || errors.get()
                             .into_iter()
-                            .map(|(_, error)| view! { cx, <li>{error.to_string()} </li> })
+                            .map(|(_, error)| view! { <li>{error.to_string()} </li> })
                             .collect::<Vec<_>>()
                         }
                         </ul>

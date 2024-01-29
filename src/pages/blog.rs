@@ -4,8 +4,8 @@ use crate::utils::page_meta::PageMeta;
 use crate::utils::post::get_post_metadata;
 
 #[component]
-fn SkeletonPost(cx: Scope) -> impl IntoView {
-    view! { cx,
+fn SkeletonPost() -> impl IntoView {
+    view! {
         <div class="skeleton-card">
             <div class="skeleton skeleton-header"></div>
             <div class="skeleton skeleton-text skeleton-details"></div>
@@ -16,16 +16,16 @@ fn SkeletonPost(cx: Scope) -> impl IntoView {
 }
 
 #[component]
-pub fn Blog(cx: Scope) -> impl IntoView {
-    let posts = create_resource(cx, || (), |_| async { get_post_metadata().await });
+pub fn Blog() -> impl IntoView {
+    let posts = create_resource(|| (), |_| async { get_post_metadata().await });
     let posts_view = move || {
-        posts.with(cx, |posts| {
+        posts.map(|posts| {
             posts.clone().map(|posts| {
                 posts
                     .iter()
                     .filter(|p| p.hidden == false)
                     .map(|post| {
-                        view! { cx,
+                        view! {
                             <li>
                                 <a href=format!("/blog/post/{}", post.id)>
                                     <h2>{&post.title}</h2>
@@ -42,23 +42,23 @@ pub fn Blog(cx: Scope) -> impl IntoView {
         })
     };
 
-    view! { cx,
+    view! {
         <PageMeta title="fyssion's blog" description="Thoughts and reflections without thinking or reflecting" />
 
         <h1>"Blog"</h1>
         <p>"An RSS feed for this blog is available "<a target="_blank" href="/blog/feed.rss">"here"</a>"."</p>
-        <Suspense fallback=move || view! { cx,
+        <Suspense fallback=move || view! {
             <SkeletonPost />
             <SkeletonPost />
         }>
-            <ErrorBoundary fallback=|cx, errors| {
-                view! { cx,
+            <ErrorBoundary fallback=|errors| {
+                view! {
                     <div class="error">
                         <h2>"Aw shucks"</h2>
                         <ul>
                         {move || errors.get()
                             .into_iter()
-                            .map(|(_, error)| view! { cx, <li>{error.to_string()} </li> })
+                            .map(|(_, error)| view! { <li>{error.to_string()} </li> })
                             .collect::<Vec<_>>()
                         }
                         </ul>

@@ -2,8 +2,8 @@ use leptos::*;
 use leptos_meta::*;
 
 #[component]
-pub fn NotFound(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn NotFound() -> impl IntoView {
+    view! {
         <Title text="fyssion's zone"/>
         <div class="container">
             <div class="content">

@@ -13,13 +13,11 @@ use crate::pages::{
 static SITE_TITLE: &'static str = "fyssion's zone";
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
+pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
-    provide_meta_context(cx);
+    provide_meta_context();
 
     view! {
-        cx,
-
         <Html lang="en" />
 
         // injects a stylesheet into the document <head>
@@ -42,7 +40,7 @@ pub fn App(cx: Scope) -> impl IntoView {
         <Link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
         //  TODO: add real error handling
-        <Router fallback=move |cx| {view!{ cx, <NotFound />}.into_view(cx)}>
+        <Router fallback=move || {view!{ <NotFound />}.into_view()}>
         <div class="app">
                 <header>
                     <nav>
@@ -63,12 +61,12 @@ pub fn App(cx: Scope) -> impl IntoView {
 
                 <main>
                     <Routes>
-                        <Route path="" view=|cx| view! { cx, <Home/> }/>
-                        // <Route path="about" view=|cx| view! { cx, <About/> }/>
-                        <Route path="blog" view=|cx| view! { cx, <Blog/> }/>
+                        <Route path="" view=|| view! { <Home/> }/>
+                        // <Route path="about" view=|| view! { <About/> }/>
+                        <Route path="blog" view=|| view! { <Blog/> }/>
                         <Route
                             path="/blog/post/:id"
-                            view=|cx| view! { cx, <BlogPost/> }
+                            view=|| view! { <BlogPost/> }
                             ssr=leptos_router::SsrMode::Async
                         />
                     </Routes>

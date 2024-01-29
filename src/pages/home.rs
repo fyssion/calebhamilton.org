@@ -2,8 +2,8 @@ use crate::utils::page_meta::PageMeta;
 use leptos::*;
 
 #[component]
-pub fn Home(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn Home() -> impl IntoView {
+    view! {
         <PageMeta title="fyssion's zone" description="Fyssion's personal website" />
 
         <h1>"Welcome"</h1>
