@@ -43,7 +43,7 @@ if #[cfg(feature = "ssr")] {
                 });
 
             let content = tokio::fs::read_to_string(entry.path()).await?;
-            posts.push(PostMetadata::build(id, content)?);
+            posts.push(PostMetadata::build(&id, &content)?);
 
         }
 
@@ -75,9 +75,9 @@ if #[cfg(feature = "ssr")] {
     }
 
     impl PostMetadata {
-        pub fn build(id: String, content: String) -> Result<Self, LoadingError> {
+        pub fn build(id: &String, content: &String) -> Result<Self, LoadingError> {
             let arena = comrak::Arena::new();
-            let root = comrak::parse_document(&arena, &content, &COMRAK_OPTIONS);
+            let root = comrak::parse_document(&arena, content, &COMRAK_OPTIONS);
 
             let front_matter = traverse(root).find_map(|node| match node.data.borrow().value {
                 comrak::nodes::NodeValue::FrontMatter(ref bytes) => Some(String::from_utf8_lossy(bytes).into_owned()),
@@ -87,7 +87,7 @@ if #[cfg(feature = "ssr")] {
             let parsed_metadata: ParsedPostMetadata = toml::from_str(front_matter.unwrap_or_default().trim().trim_matches('-'))?;
 
             Ok(Self {
-                id,
+                id: id.to_owned(),
                 title: parsed_metadata.title,
                 description: parsed_metadata.description,
                 created_at: parsed_metadata.created_at,
@@ -121,8 +121,10 @@ pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
     let post = match tokio::fs::read_to_string(format!("posts/{}.md", id)).await {
         Ok(p) => {
             let content = comrak::markdown_to_html(&p, &COMRAK_OPTIONS);
-            let posts = get_post_metadata().await?;
-            let metadata = posts.iter().find(|m| m.id == id).unwrap().clone();
+            let metadata = match PostMetadata::build(&id, &p) {
+                Ok(m) => Ok(m),
+                Err(e) => Err(ServerFnError::ServerError(e.to_string()))
+            }?;
             Some(Post {
                 id,
                 content,
