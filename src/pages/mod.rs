@@ -1,5 +1,6 @@
 pub mod about;
 pub mod blog;
+#[cfg(feature = "ssr")]
 pub mod fallback;
 pub mod feed;
 pub mod home;

@@ -123,7 +123,7 @@ pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
             let content = comrak::markdown_to_html(&p, &COMRAK_OPTIONS);
             let metadata = match PostMetadata::build(&id, &p) {
                 Ok(m) => Ok(m),
-                Err(e) => Err(ServerFnError::ServerError(e.to_string()))
+                Err(e) => Err(ServerFnError::new(e.to_string()))
             }?;
             Some(Post {
                 id,
@@ -144,6 +144,6 @@ pub async fn get_post_metadata() -> Result<Vec<PostMetadata>, ServerFnError> {
     // TODO ^^
     match load_posts().await {
         Ok(p) => Ok(p),
-        Err(e) => Err(ServerFnError::ServerError(e.to_string())),
+        Err(e) => Err(ServerFnError::new(e.to_string())),
     }
 }

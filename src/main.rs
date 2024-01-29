@@ -2,7 +2,7 @@
 #[tokio::main]
 async fn main() {
     use axum::{
-        routing::{get, post},
+        routing::get,
         Router,
     };
     use fyssion_zone::app::*;
@@ -28,8 +28,7 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     let app = Router::new()
-        .route("/api/*fn_name", post(leptos_axum::handle_server_fns))
-        .leptos_routes(&leptos_options, routes, |cx| view! { cx, <App/> })
+        .leptos_routes(&leptos_options, routes, || view! { <App/> })
         .route("/blog/feed.rss", get(feed))
         .fallback(file_and_error_handler)
         .with_state(leptos_options)
@@ -38,8 +37,8 @@ async fn main() {
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
     log!("listening on http://{}", &addr);
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
+    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
+    axum::serve(listener, app.into_make_service())
         .await
         .unwrap();
 
