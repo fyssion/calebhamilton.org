@@ -10,19 +10,19 @@ crate-type = ["cdylib", "rlib"]
 console_error_panic_hook = "0.1"
 console_log = "0.2"
 cfg-if = "1"
-leptos = { version = "0.4", features = [
+leptos = { version = "0.6", features = [
   "serde", "nightly",
 ] }
-leptos_meta = { version = "0.4", features = ["nightly"] }
-leptos_axum = { version = "0.4", optional = true }
-leptos_router = { version = "0.4", features = ["nightly"] }
+leptos_meta = { version = "0.6", features = ["nightly"] }
+leptos_axum = { version = "0.6", optional = true }
+leptos_router = { version = "0.6", features = ["nightly"] }
 log = "0.4"
 simple_logger = "4"
 wasm-bindgen = "0.2"
 comrak = "0.16.0"
 serde = { version = "1", features = ["derive"] }
 thiserror = "1.0.38"
-tokio = { version = "1.26.0", features = ["fs"], optional = true }
+tokio = { version = "1", features = ["fs", "rt-multi-thread"], optional = true }
 lazy_static = "1.4.0"
 toml = "0.7.2"
 chrono = { version = "0.4.23", features = ["serde"] }
@@ -30,9 +30,9 @@ js-sys = "0.3.61"
 chrono-humanize = { version = "0.2.2", features = ["wasmbind"] }
 words-count = "0.1.4"
 rss = { version = "2.0.2", features = ["chrono"], optional = true }
-axum = { version = "0.6.1", optional = true }
-tower = { version = "0.4.13", optional = true }
-tower-http = { version = "0.4", features = ["fs", "trace"], optional = true }
+axum = { version = "0.7", optional = true }
+tower = { version = "0.4", optional = true }
+tower-http = { version = "0.5", features = ["fs", "trace"], optional = true }
 tracing-subscriber = { version = "0.3", optional = true }
 
 [features]
