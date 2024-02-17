@@ -1,4 +1,5 @@
 use leptos::*;
+use leptos_meta::Link;
 
 use crate::utils::page_meta::PageMeta;
 use crate::utils::post::get_post_metadata;
@@ -44,6 +45,7 @@ pub fn Blog() -> impl IntoView {
 
     view! {
         <PageMeta title="fyssion's blog" description="Thoughts and reflections without thinking or reflecting" />
+        <Link rel="alternate" type_="application/rss+xml" title="RSS Feed" href="/blog/feed.rss" />
 
         <h1>"Blog"</h1>
         <p>"An RSS feed for this blog is available "<a target="_blank" href="/blog/feed.rss">"here"</a>"."</p>
