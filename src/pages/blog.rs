@@ -2,6 +2,7 @@ use leptos::*;
 use leptos_meta::Link;
 
 use crate::utils::page_meta::PageMeta;
+use crate::utils::post_meta::PostMeta;
 use crate::utils::post::get_post_metadata;
 
 #[component]
@@ -31,9 +32,7 @@ pub fn Blog() -> impl IntoView {
                                 <a href=format!("/blog/post/{}", post.id)>
                                     <h2>{&post.title}</h2>
                                 </a>
-                                <h3>{
-                                    &post.created_at.format("%b %e, %Y").to_string()
-                                }</h3>
+                                <PostMeta metadata={&post} />
                                 <p>{&post.description}</p>
                             </li>
                         }

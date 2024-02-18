@@ -78,6 +78,38 @@ if #[cfg(feature = "ssr")] {
         })
     }
 
+    struct PostCounter {
+        pub length: usize,
+        pub word_count: usize,
+    }
+
+    impl PostCounter {
+        pub fn from_string(string: String) -> Self {
+            PostCounter {
+                length: string.chars().count(),
+                word_count: words_count::count(string).words,
+            }
+        }
+
+        pub fn empty() -> Self {
+            PostCounter {
+                length: 0,
+                word_count: 0,
+            }
+        }
+    }
+
+    impl Add<PostCounter> for PostCounter {
+        type Output = PostCounter;
+
+        fn add(self, other: PostCounter) -> PostCounter {
+            PostCounter {
+                length: self.length + other.length,
+                word_count: self.word_count + other.word_count,
+            }
+        }
+    }
+
     impl PostMetadata {
         pub fn build(id: &String, content: &String) -> Result<Self, LoadingError> {
             let arena = comrak::Arena::new();
@@ -88,6 +120,16 @@ if #[cfg(feature = "ssr")] {
                 _ => None,
             });
 
+            let counter = traverse(root)
+                .map(|node| match node.data.borrow().value {
+                    comrak::nodes::NodeValue::Text(ref bytes) => PostCounter::from_string(String::from_utf8_lossy(bytes).into_owned()),
+                    comrak::nodes::NodeValue::Code(ref code) => PostCounter::from_string(String::from_utf8(code.literal.clone()).expect("a valid utf-8 string")),
+                    comrak::nodes::NodeValue::CodeBlock(ref code) => PostCounter::from_string(String::from_utf8(code.literal.clone()).expect("a valid utf-8 string")),
+                    _ => PostCounter::empty(),
+                })
+                .reduce(|acc, e| acc + e)
+                .expect("there to be content in the post");
+
             let parsed_metadata: ParsedPostMetadata = toml::from_str(front_matter.unwrap_or_default().trim().trim_matches('-'))?;
 
             Ok(Self {
@@ -96,6 +138,8 @@ if #[cfg(feature = "ssr")] {
                 description: parsed_metadata.description,
                 created_at: parsed_metadata.created_at,
                 hidden: parsed_metadata.hidden,
+                length: counter.length,
+                word_count: counter.word_count,
             })
         }
     }
@@ -118,6 +162,8 @@ pub struct PostMetadata {
     #[serde(with = "chrono::serde::ts_seconds")]
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub hidden: bool,
+    pub length: usize,
+    pub word_count: usize,
 }
 
 #[server(GetPost, "/api")]
