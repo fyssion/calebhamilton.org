@@ -36,6 +36,7 @@ RUN cargo leptos build --release
 
 FROM debian:buster-slim
 COPY ./posts /usr/local/share/fyssion_zone/posts
+COPY ./vendor /usr/local/share/fyssion_zone/vendor
 COPY --from=builder ./target/site /usr/local/share/fyssion_zone/site
 COPY --from=builder ./target/release/fyssion_zone /usr/local/bin/fyssion_zone
 WORKDIR /usr/local/share/fyssion_zone
