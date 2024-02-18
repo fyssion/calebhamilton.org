@@ -1,3 +1,5 @@
+use cfg_if::cfg_if;
+
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
@@ -30,6 +32,7 @@ async fn main() {
     let app = Router::new()
         .leptos_routes(&leptos_options, routes, || view! { <App/> })
         .route("/blog/feed.rss", get(feed))
+        .route("/blog/post/:post", get(post_redirect))
         .fallback(file_and_error_handler)
         .with_state(leptos_options)
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
@@ -67,4 +70,19 @@ pub fn main() {
     // no client-side main function
     // unless we want this to work with e.g., Trunk for pure client-side testing
     // see lib.rs for hydration function instead
+}
+
+// blog posts used to be routed under /blog/post/<post>, but
+// I switched it to /blog/<post>, so this handler redirects
+// old post URLs
+cfg_if! {
+    if #[cfg(feature = "ssr")] {
+
+        use axum::{extract::Path, response::{IntoResponse, Redirect}};
+
+        async fn post_redirect(Path(post): Path<String>) -> impl IntoResponse {
+            let uri = format!("/blog/{}", post);
+            Redirect::to(&uri).into_response()
+        }
+    }
 }

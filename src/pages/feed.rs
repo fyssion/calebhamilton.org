@@ -24,7 +24,7 @@ cfg_if! {
                     .map(|p| {
                         ItemBuilder::default()
                             .title(Some(p.title.to_owned()))
-                            .link(Some(format!("https://fyssion.zone/blog/post/{}/", p.id.to_owned()).to_owned()))
+                            .link(Some(format!("https://fyssion.zone/blog/{}/", p.id.to_owned()).to_owned()))
                             .description(Some(p.description.to_owned()))
                             .author(Some("fyssioncodes@gmail.com (Fyssion)".to_owned()))
                             .guid(

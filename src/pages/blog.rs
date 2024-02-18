@@ -29,7 +29,7 @@ pub fn Blog() -> impl IntoView {
                     .map(|post| {
                         view! {
                             <li>
-                                <a href=format!("/blog/post/{}", post.id)>
+                                <a href=format!("/blog/{}", post.id)>
                                     <h2>{&post.title}</h2>
                                 </a>
                                 <PostMeta metadata={&post} />

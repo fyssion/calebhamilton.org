@@ -63,7 +63,7 @@ pub fn App() -> impl IntoView {
                         // <Route path="about" view=|| view! { <About/> }/>
                         <Route path="blog" view=|| view! { <Blog/> }/>
                         <Route
-                            path="/blog/post/:id"
+                            path="/blog/:id"
                             view=|| view! { <BlogPost/> }
                             ssr=leptos_router::SsrMode::Async
                         />
