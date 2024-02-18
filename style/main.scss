@@ -4,7 +4,7 @@
 	--font-line-height: 1.5;
 	--color-bg-1: #272838;
 	--color-bg-2: #07393C;
-	--color-bg-code: hsl(236, 18%, 10%);
+	--color-bg-code: #1d1f29;
 	--color-text: rgb(240, 240, 240);
 	--color-text-content: rgb(220, 220, 220);
 	--color-text-muted: rgba(220, 220, 220, 0.65);
@@ -79,6 +79,22 @@ code {
 	background-color: var(--color-bg-code);
 	border-radius: 0.25rem;
 	padding: 0.2rem 0.3rem;
+}
+
+pre {
+	border-radius: .25rem;
+
+	code {
+		font-family: var(--font-mono);
+		display: block;
+		overflow-x: auto;
+		// TODO: there's a quirk of Comrak/syntect where it adds
+		// an extra newline at the beginning and end of the code
+		//  element, causing some extra padding to appear.
+		// I should probably actually fix this instead of just
+		// using the line height but whatever I guess
+		padding: 0 1.5rem;
+	}
 }
 
 .text-column {

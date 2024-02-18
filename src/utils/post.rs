@@ -24,6 +24,10 @@ lazy_static! {
 cfg_if! {
 if #[cfg(feature = "ssr")] {
     use crate::utils::errors::LoadingError;
+    use syntect::highlighting::ThemeSet;
+    use std::ops::Add;
+    use comrak::{plugins::syntect::SyntectAdapterBuilder, ComrakPlugins, ComrakRenderPlugins};
+
 
     pub async fn load_posts() -> Result<Vec<PostMetadata>, LoadingError> {
 
@@ -120,7 +124,17 @@ pub struct PostMetadata {
 pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
     let post = match tokio::fs::read_to_string(format!("posts/{}.md", id)).await {
         Ok(p) => {
-            let content = comrak::markdown_to_html(&p, &COMRAK_OPTIONS);
+            let theme_set = ThemeSet::load_from_folder("vendor").unwrap();
+            let adapter = SyntectAdapterBuilder::new().theme_set(theme_set).theme("Enki-Tokyo-Night").build();
+            let plugins = ComrakPlugins {
+                render: ComrakRenderPlugins {
+                    codefence_syntax_highlighter: Some(&adapter),
+                    ..Default::default()
+                },
+                ..Default::default()
+            };
+
+            let content = comrak::markdown_to_html_with_plugins(&p, &COMRAK_OPTIONS, &plugins);
             let metadata = match PostMetadata::build(&id, &p) {
                 Ok(m) => Ok(m),
                 Err(e) => Err(ServerFnError::new(e.to_string()))

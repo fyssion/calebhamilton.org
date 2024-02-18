@@ -112,9 +112,6 @@ pub fn BlogPost() -> impl IntoView {
                     <PageMeta title={format!("{} - fyssion's blog", post.metadata.title)} description=post.metadata.description />
                     <Meta name="og:type" content="article"/>
                     <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
-
-                    // need to do this after post loads
-                    <script>"hljs.highlightAll();"</script>
                 }
             })
         })
