@@ -2,6 +2,7 @@
 title = "How to host a Minecraft server for cheap"
 description = "A quick and dirty guide for those who want better, stemming from some past experiences."
 created_at = 1708243198
+hidden = true
 ---
 
 Note that before I get into this, I'd like to mention that I haven't hosted a Minecraft server in a few years. I'm mainly writing this for some friends who want to pick up the baton of hosting the yearly Minecraft server. I hosted multiple Minecraft servers per year for around 6 or 7 years, so I'd like to think I have some idea of what I'm doing. Who knows though.
