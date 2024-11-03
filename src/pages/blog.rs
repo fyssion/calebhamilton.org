@@ -43,7 +43,7 @@ pub fn Blog() -> impl IntoView {
     };
 
     view! {
-        <PageMeta title="fyssion's blog" description="Thoughts and reflections without thinking or reflecting" />
+        <PageMeta title="Caleb's Blog" description="Thoughts and reflections without thinking or reflecting" />
         <Link rel="alternate" type_="application/rss+xml" title="RSS Feed" href="/blog/feed.rss" />
 
         <h1>"Blog"</h1>

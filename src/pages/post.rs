@@ -64,9 +64,9 @@ pub fn BlogPost() -> impl IntoView {
                     // since we're using async rendering for this page,
                     // this metadata should be included in the actual HTML <head>
                     // when it's first served
-                    // <Title text={format!("{} - fyssion's blog", post.metadata.title)}/>
+                    // <Title text={format!("{} - Caleb's Blog", post.metadata.title)}/>
                     // <Meta name="description" content=post.metadata.description/>
-                    <PageMeta title={format!("{} - fyssion's blog", post.metadata.title)} description=post.metadata.description />
+                    <PageMeta title={format!("{} - Caleb's Blog", post.metadata.title)} description=post.metadata.description />
                     <Meta name="og:type" content="article"/>
                     <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
                 }

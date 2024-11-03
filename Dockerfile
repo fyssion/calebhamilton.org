@@ -35,14 +35,14 @@ COPY . .
 RUN cargo leptos build --release
 
 FROM debian:buster-slim
-COPY ./posts /usr/local/share/fyssion_zone/posts
-COPY ./vendor /usr/local/share/fyssion_zone/vendor
-COPY --from=builder ./target/site /usr/local/share/fyssion_zone/site
-COPY --from=builder ./target/release/fyssion_zone /usr/local/bin/fyssion_zone
-WORKDIR /usr/local/share/fyssion_zone
-ENV LEPTOS_OUTPUT_NAME="fyssion_zone"
+COPY ./posts /usr/local/share/calebhamilton_org/posts
+COPY ./vendor /usr/local/share/calebhamilton_org/vendor
+COPY --from=builder ./target/site /usr/local/share/calebhamilton_org/site
+COPY --from=builder ./target/release/calebhamilton_org /usr/local/bin/calebhamilton_org
+WORKDIR /usr/local/share/calebhamilton_org
+ENV LEPTOS_OUTPUT_NAME="calebhamilton_org"
 ENV LEPTOS_SITE_ADDR="0.0.0.0:3000"
-ENV LEPTOS_SITE_ROOT="/usr/local/share/fyssion_zone/site"
-ENV LEPTOS_PKG_PATH="/usr/local/share/fyssion_zone/site/pkg"
+ENV LEPTOS_SITE_ROOT="/usr/local/share/calebhamilton_org/site"
+ENV LEPTOS_PKG_PATH="/usr/local/share/calebhamilton_org/site/pkg"
 EXPOSE 3000
-CMD ["/usr/local/bin/fyssion_zone"]
+CMD ["/usr/local/bin/calebhamilton_org"]

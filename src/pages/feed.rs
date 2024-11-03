@@ -11,8 +11,8 @@ cfg_if! {
         let posts = get_post_metadata().await.unwrap();
 
         let channel = ChannelBuilder::default()
-            .title("Fyssion's blog")
-            .link("https://fyssion.zone/blog/")
+            .title("Caleb's Blog")
+            .link("https://calebhamilton.org/blog/")
             .description("Thoughts and reflections without thinking or reflecting")
             .language(Some("en-us".to_owned()))
             .copyright(Some("Copyright 2023-present Fyssion".to_owned()))
@@ -24,12 +24,12 @@ cfg_if! {
                     .map(|p| {
                         ItemBuilder::default()
                             .title(Some(p.title.to_owned()))
-                            .link(Some(format!("https://fyssion.zone/blog/{}/", p.id.to_owned()).to_owned()))
+                            .link(Some(format!("https://calebhamilton.org/blog/{}/", p.id.to_owned()).to_owned()))
                             .description(Some(p.description.to_owned()))
                             .author(Some("fyssioncodes@gmail.com (Fyssion)".to_owned()))
                             .guid(
                                 GuidBuilder::default()
-                                    .value(format!("https://fyssion.zone/blog/post/{}/", p.id.to_owned()).to_owned())
+                                    .value(format!("https://calebhamilton.org/blog/post/{}/", p.id.to_owned()).to_owned())
                                     .permalink(true)
                                     .build()
                             ) // TODO: add post content (requires some code restructuring)

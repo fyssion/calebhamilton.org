@@ -17,7 +17,7 @@ This is also to be my personal blog, after all, tied directly to me,
 which means the pressure's on, huh? At least that's how I felt.
 It's a bit silly, but so am I. So for a couple of years, nothing happened.
 
-Recently (November 2022), I discovered [Leptos][leptos], a Rust framework for making web apps.
+In November 2022, I discovered [Leptos][leptos], a Rust framework for making web apps.
 It seemed pretty neat, so I thought I'd give it a go.
 In the weeks prior, I had been slowly exploring the world of WebAssembly and taking a surface-level peek at browser internals.
 I was also trying to find new ways to learn Rust, so writing a fully-fledged web app in the language was rather appealing.
@@ -194,7 +194,7 @@ I'll try to make a habit out of writing these posts,
 but no promises!
 Thanks for reading.
 
-\- Fysh
+\- Caleb
 
 [^1]: I think building a static site generator would still feasibly be possible if
     I disabled hydration and pre-rendered every possible route to an HTML file

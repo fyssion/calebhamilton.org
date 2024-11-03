@@ -10,7 +10,7 @@ use crate::pages::{
     post::BlogPost,
 };
 
-static SITE_TITLE: &'static str = "fyssion's zone";
+static SITE_TITLE: &'static str = "Caleb Hamilton";
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -22,7 +22,7 @@ pub fn App() -> impl IntoView {
 
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/fyssion_zone.css"/>
+        <Stylesheet id="leptos" href="/pkg/calebhamilton_org.css"/>
 
         <Title text=SITE_TITLE/>
 
@@ -43,7 +43,7 @@ pub fn App() -> impl IntoView {
                 <header>
                     <nav>
                         <div class="logo">
-                            <A exact=true href="/">"fyssion.zone"</A>
+                            <A exact=true href="/">"calebhamilton.org"</A>
                             // <A href="about">"about"</A>  // not yet!!
                         </div>
                         <ul>
