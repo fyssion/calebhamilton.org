@@ -6,7 +6,7 @@ use crate::pages::{
     blog::Blog,
     home::Home,
     not_found::NotFound,
-    // about::About,
+    projects::Projects,
     post::BlogPost,
 };
 
@@ -44,14 +44,13 @@ pub fn App() -> impl IntoView {
                     <nav>
                         <div class="logo">
                             <A exact=true href="/">"calebhamilton.org"</A>
-                            // <A href="about">"about"</A>  // not yet!!
                         </div>
                         <ul>
                             <li>
                                 <A href="blog">"blog"</A>
                             </li>
                             <li>
-                                <a href="https://github.com/Fyssion">"github"</a>
+                                <A href="projects">"projects"</A>
                             </li>
                         </ul>
                     </nav>
@@ -60,7 +59,7 @@ pub fn App() -> impl IntoView {
                 <main>
                     <Routes>
                         <Route path="" view=|| view! { <Home/> }/>
-                        // <Route path="about" view=|| view! { <About/> }/>
+                        <Route path="projects" view=|| view! { <Projects/> }/>
                         <Route path="blog" view=|| view! { <Blog/> }/>
                         <Route
                             path="/blog/:id"

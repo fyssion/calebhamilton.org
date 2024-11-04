@@ -1,4 +1,4 @@
-pub mod about;
+pub mod projects;
 pub mod blog;
 #[cfg(feature = "ssr")]
 pub mod fallback;
