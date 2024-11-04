@@ -69,9 +69,20 @@ pub fn App() -> impl IntoView {
                         />
                     </Routes>
                 </main>
-                // <footer>
-                //     <p>"Made with Rust using Leptos!"</p>
-                // </footer>
+                <footer>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/Fyssion" target="_blank">
+                                <img src="/github.svg" />"Fyssion"
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/calebthamilton/" target="_blank">
+                            <img src="/linkedin.svg" />"calebthamilton"
+                        </a>
+                        </li>
+                    </ul>
+                </footer>
             </div>
         </Router>
     }
