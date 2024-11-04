@@ -24,7 +24,7 @@
 }
 
 body {
-	min-height: 100vh;
+	min-height: 100dvh;
 	margin: 0;
 	background-attachment: fixed;
 	background-color: var(--color-bg-1);
@@ -153,6 +153,12 @@ nav {
 		font-size: 1.5rem;
 	}
 
+	@media screen and (max-width: 400px) {
+		.logo {
+			font-size: 1.25rem;
+		}
+	}
+
 	ul {
 		list-style: none;
 		margin: auto 0;
@@ -165,6 +171,12 @@ nav {
 
 		li + li {
 			margin-inline-start: 1.5rem;
+		}
+
+		@media screen and (max-width: 430px) {
+			li + li {
+				margin-inline-start: 0.75rem;
+			}
 		}
 	}
 }
