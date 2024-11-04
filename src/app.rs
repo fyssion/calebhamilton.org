@@ -30,8 +30,8 @@ pub fn App() -> impl IntoView {
         <Link rel="icon" type_="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <Link rel="icon" type_="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <Link rel="manifest" href="/site.webmanifest" />
-        <Meta name="msapplication-TileColor" content="#EB9486" />
-        <Meta name="theme-color" content="#EB9486" />
+        <Meta name="msapplication-TileColor" content="#272838" />
+        <Meta name="theme-color" content="#272838" />
 
         <Script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" />
         <Link rel="preconnect" href="https://rsms.me/" />
