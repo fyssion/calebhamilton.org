@@ -43,7 +43,7 @@ pub fn App() -> impl IntoView {
                 <header>
                     <nav>
                         <div class="logo">
-                            <A exact=true href="/">"calebhamilton.org"</A>
+                            <A exact=true href="/">"Caleb Hamilton"</A>
                         </div>
                         <ul>
                             <li>
