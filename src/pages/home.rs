@@ -20,7 +20,7 @@ pub fn Home() -> impl IntoView {
             "You can find some of my favorite projects on my "
             <A href="/projects">"projects page"</A>
             ", see what I've been thinking about on "
-            <A href="/blog">"blog"</A>
+            <A href="/blog">"my blog"</A>
             ", or browse all my public work on my "
             <a href="https://github.com/Fyssion">"GitHub"</a>"."
         </p>
