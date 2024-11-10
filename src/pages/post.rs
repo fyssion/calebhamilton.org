@@ -13,10 +13,9 @@ fn SkeletonPost() -> impl IntoView {
         <div class="skeleton-card-full title">
             <div class="skeleton skeleton-header title"></div>
             <div class="skeleton skeleton-text skeleton-details"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
+            {(0..12).into_iter()
+                .map(|_| view! {<div class="skeleton skeleton-text" />})
+                .collect::<Vec<_>>()}
         </div>
     }
 }

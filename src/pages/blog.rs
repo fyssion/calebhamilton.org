@@ -5,6 +5,8 @@ use crate::utils::page_meta::PageMeta;
 use crate::utils::post_meta::PostMeta;
 use crate::utils::post::get_post_metadata;
 
+static SKELETON_POSTS: u8 = 1;
+
 #[component]
 fn SkeletonPost() -> impl IntoView {
     view! {
@@ -49,8 +51,9 @@ pub fn Blog() -> impl IntoView {
         <h1>"Blog"</h1>
         <p>"An RSS feed for this blog is available "<a target="_blank" href="/blog/feed.rss">"here"</a>"."</p>
         <Suspense fallback=move || view! {
-            <SkeletonPost />
-            <SkeletonPost />
+            {(0..SKELETON_POSTS).into_iter()
+                .map(|_| view! {<SkeletonPost />})
+                .collect::<Vec<_>>()}
         }>
             <ErrorBoundary fallback=|errors| {
                 view! {
