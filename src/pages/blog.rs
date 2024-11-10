@@ -2,8 +2,8 @@ use leptos::*;
 use leptos_meta::Link;
 
 use crate::utils::page_meta::PageMeta;
-use crate::utils::post_meta::PostMeta;
 use crate::utils::post::get_post_metadata;
+use crate::utils::post_meta::PostMeta;
 
 static SKELETON_POSTS: u8 = 1;
 

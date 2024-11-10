@@ -9,25 +9,27 @@ pub fn Project(
     timeframe: &'static str,
     // #[prop(optional)]
     // url: &'static str,
-    #[prop(optional)]
-    github: &'static str,
-    #[prop(optional)]
-    image: &'static str,
+    #[prop(optional)] github: &'static str,
+    #[prop(optional)] image: &'static str,
 ) -> impl IntoView {
-    let cover_image = move || (!image.is_empty()).then(||
-        view! {
-            <img class="project-cover" src={image} loading="lazy" />
-        }
-    );
+    let cover_image = move || {
+        (!image.is_empty()).then(|| {
+            view! {
+                <img class="project-cover" src={image} loading="lazy" />
+            }
+        })
+    };
 
-    let github_icon = move || (!github.is_empty()).then(||
-        view! {
-            <a href={format!("https://github.com/{}", github)} target="_blank">
-                <img src="/github.svg" />
-                <span>{github}</span>
-            </a>
-        }
-    );
+    let github_icon = move || {
+        (!github.is_empty()).then(|| {
+            view! {
+                <a href={format!("https://github.com/{}", github)} target="_blank">
+                    <img src="/github.svg" />
+                    <span>{github}</span>
+                </a>
+            }
+        })
+    };
 
     view! {
         <li>

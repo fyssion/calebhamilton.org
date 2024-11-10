@@ -171,7 +171,10 @@ pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
     let post = match tokio::fs::read_to_string(format!("posts/{}.md", id)).await {
         Ok(p) => {
             let theme_set = ThemeSet::load_from_folder("vendor").unwrap();
-            let adapter = SyntectAdapterBuilder::new().theme_set(theme_set).theme("Enki-Tokyo-Night").build();
+            let adapter = SyntectAdapterBuilder::new()
+                .theme_set(theme_set)
+                .theme("Enki-Tokyo-Night")
+                .build();
             let plugins = ComrakPlugins {
                 render: ComrakRenderPlugins {
                     codefence_syntax_highlighter: Some(&adapter),
@@ -183,7 +186,7 @@ pub async fn get_post(id: String) -> Result<Option<Post>, ServerFnError> {
             let content = comrak::markdown_to_html_with_plugins(&p, &COMRAK_OPTIONS, &plugins);
             let metadata = match PostMetadata::build(&id, &p) {
                 Ok(m) => Ok(m),
-                Err(e) => Err(ServerFnError::new(e.to_string()))
+                Err(e) => Err(ServerFnError::new(e.to_string())),
             }?;
             Some(Post {
                 id,

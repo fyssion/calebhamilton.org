@@ -3,11 +3,7 @@ use leptos_meta::*;
 use leptos_router::*;
 
 use crate::pages::{
-    blog::Blog,
-    home::Home,
-    not_found::NotFound,
-    projects::Projects,
-    post::BlogPost,
+    blog::Blog, home::Home, not_found::NotFound, post::BlogPost, projects::Projects,
 };
 
 static SITE_TITLE: &'static str = "Caleb Hamilton";

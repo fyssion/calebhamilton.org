@@ -1,7 +1,7 @@
+use leptos::logging::log;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-use leptos::logging::log;
 
 use crate::utils::page_meta::PageMeta;
 use crate::utils::post_meta::PostMeta;

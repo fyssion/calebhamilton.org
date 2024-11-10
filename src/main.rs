@@ -3,16 +3,13 @@ use cfg_if::cfg_if;
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
-    use axum::{
-        routing::get,
-        Router,
-    };
+    use axum::{routing::get, Router};
     use calebhamilton_org::app::*;
     use calebhamilton_org::pages::fallback::file_and_error_handler;
     use calebhamilton_org::pages::feed::feed;
+    use leptos::logging::log;
     use leptos::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
-    use leptos::logging::log;
     use tower::ServiceBuilder;
     use tower_http::trace::TraceLayer;
 
