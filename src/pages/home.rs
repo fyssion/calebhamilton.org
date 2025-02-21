@@ -9,7 +9,7 @@ pub fn Home() -> impl IntoView {
 
         <h1>"Welcome"</h1>
 
-        <p>"I'm Caleb. You might also see me as Fyssion."</p>
+        <p>"I'm Caleb."</p>
         <p>
             "I'm currently a student at the University of Wisconsin - Madison "
             "studying computer science, but my passion for creating software long precedes "
