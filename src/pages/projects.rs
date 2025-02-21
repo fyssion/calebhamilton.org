@@ -1,14 +1,12 @@
 use crate::utils::page_meta::PageMeta;
-use leptos::*;
-use leptos_router::A;
+use leptos::prelude::*;
+use leptos_router::components::A;
 
 #[component]
 pub fn Project(
     children: Children,
     name: &'static str,
     timeframe: &'static str,
-    // #[prop(optional)]
-    // url: &'static str,
     #[prop(optional)] github: &'static str,
     #[prop(optional)] image: &'static str,
 ) -> impl IntoView {

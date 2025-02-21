@@ -1,7 +1,9 @@
 use leptos::logging::log;
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos::Params;
+use leptos_router::params::Params;
+use leptos_router::hooks::use_params;
 
 use crate::utils::page_meta::PageMeta;
 use crate::utils::post_meta::PostMeta;
@@ -35,7 +37,7 @@ pub fn BlogPost() -> impl IntoView {
                 .map_err(|_| PostError::InvalidTitle)
         })
     };
-    let post = create_resource(id, |id| async move {
+    let post = Resource::new(id, |id| async move {
         match id {
             Err(e) => Err(e),
             Ok(id) => get_post(id.clone())
@@ -55,9 +57,9 @@ pub fn BlogPost() -> impl IntoView {
                 view! {
                         <article>
                         // render content
-                        <h1 class="title">{&post.metadata.title}</h1>
-                        <PostMeta metadata={&post.metadata} />
-                        <section inner_html={&post.content} />
+                        <h1 class="title">{post.metadata.title.clone()}</h1>
+                        <PostMeta metadata={post.metadata.clone()} />
+                        <section inner_html={post.content.clone()} />
                     </article>
 
                     // since we're using async rendering for this page,
@@ -65,7 +67,7 @@ pub fn BlogPost() -> impl IntoView {
                     // when it's first served
                     // <Title text={format!("{} - Caleb's Blog", post.metadata.title)}/>
                     // <Meta name="description" content=post.metadata.description/>
-                    <PageMeta title={format!("{} - Caleb's Blog", post.metadata.title)} description=post.metadata.description />
+                    <PageMeta title={format!("{} - Caleb's Blog", post.metadata.title.clone())} description=post.metadata.description.clone() />
                     <Meta name="og:type" content="article"/>
                     <Meta name="article:published_time" content={post.metadata.created_at.to_rfc3339()}/>
                 }

@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::Link;
 
 use crate::utils::page_meta::PageMeta;
@@ -21,7 +21,7 @@ fn SkeletonPost() -> impl IntoView {
 
 #[component]
 pub fn Blog() -> impl IntoView {
-    let posts = create_resource(|| (), |_| async { get_post_metadata().await });
+    let posts = Resource::new(|| (), |_| async { get_post_metadata().await });
     let posts_view = move || {
         posts.map(|posts| {
             posts.clone().map(|posts| {
@@ -32,10 +32,10 @@ pub fn Blog() -> impl IntoView {
                         view! {
                             <li>
                                 <a href=format!("/blog/{}", post.id)>
-                                    <h2>{&post.title}</h2>
+                                    <h2>{post.title.clone()}</h2>
                                 </a>
-                                <PostMeta metadata={&post} />
-                                <p>{&post.description}</p>
+                                <PostMeta metadata={post.clone()} />
+                                <p>{post.description.clone()}</p>
                             </li>
                         }
                     })

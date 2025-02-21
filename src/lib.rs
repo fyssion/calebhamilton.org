@@ -1,4 +1,6 @@
+
 #![feature(result_flattening)]
+
 
 pub mod app;
 pub mod pages;
@@ -13,16 +15,13 @@ if #[cfg(feature = "hydrate")] {
 
     #[wasm_bindgen]
     pub fn hydrate() {
-      use app::*;
-      use leptos::*;
+      use app::App;
 
       // initializes logging using the `log` crate
       _ = console_log::init_with_level(log::Level::Debug);
       console_error_panic_hook::set_once();
 
-      leptos::mount_to_body(move || {
-          view! { <App/> }
-      });
+      leptos::mount::hydrate_body(App);
     }
 }
 }

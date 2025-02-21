@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 use crate::utils::post::PostMetadata;
 
@@ -9,7 +9,7 @@ static READING_SPEED_CPM: usize = 987;
 static READING_SPEED_VARIANCE: usize = 118;
 
 #[component]
-pub fn PostMeta<'a>(metadata: &'a PostMetadata) -> impl IntoView {
+pub fn PostMeta(metadata: PostMetadata) -> impl IntoView {
     view! {
         <h3>
             {metadata.created_at.format("%b %e, %Y").to_string()}

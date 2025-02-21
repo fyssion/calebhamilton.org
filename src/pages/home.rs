@@ -1,6 +1,6 @@
 use crate::utils::page_meta::PageMeta;
-use leptos::*;
-use leptos_router::A;
+use leptos::prelude::*;
+use leptos_router::components::A;
 
 #[component]
 pub fn Home() -> impl IntoView {
@@ -22,7 +22,7 @@ pub fn Home() -> impl IntoView {
             ", see what I've been thinking about on "
             <A href="/blog">"my blog"</A>
             ", or browse all my public work on my "
-            <a href="https://github.com/Fyssion">"GitHub"</a>"."
+            <a rel="external" href="https://github.com/Fyssion">"GitHub"</a>"."
         </p>
     }
 }

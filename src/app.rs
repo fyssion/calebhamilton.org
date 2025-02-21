@@ -1,6 +1,9 @@
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::{
+    components::*,
+    path,
+};
 
 use crate::pages::{
     blog::Blog, home::Home, not_found::NotFound, post::BlogPost, projects::Projects,
@@ -8,33 +11,46 @@ use crate::pages::{
 
 static SITE_TITLE: &'static str = "Caleb Hamilton";
 
+pub fn shell(options: LeptosOptions) -> impl IntoView {
+    view! {
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="stylesheet" id="leptos" href="/pkg/calebhamilton_org.css"/>
+                <title>{SITE_TITLE}</title>
+
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+                <link rel="icon" type_="image/png" sizes="32x32" href="/favicon-32x32.png" />
+                <link rel="icon" type_="image/png" sizes="16x16" href="/favicon-16x16.png" />
+                <link rel="manifest" href="/site.webmanifest" />
+                <meta name="msapplication-TileColor" content="#272838" />
+                <meta name="theme-color" content="#272838" />
+
+                <Script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" />
+                <link rel="preconnect" href="https://rsms.me/" />
+                <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+                <AutoReload options=options.clone() />
+                <HydrationScripts options/>
+                <MetaTags/>
+            </head>
+            <body>
+                <App/>
+            </body>
+        </html>
+    }
+}
+
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
     view! {
-        <Html lang="en" />
-
-        // injects a stylesheet into the document <head>
-        // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/calebhamilton_org.css"/>
-
-        <Title text=SITE_TITLE/>
-
-        <Link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <Link rel="icon" type_="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <Link rel="icon" type_="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <Link rel="manifest" href="/site.webmanifest" />
-        <Meta name="msapplication-TileColor" content="#272838" />
-        <Meta name="theme-color" content="#272838" />
-
-        <Script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" />
-        <Link rel="preconnect" href="https://rsms.me/" />
-        <Link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
         //  TODO: add real error handling
-        <Router fallback=move || {view!{ <NotFound />}.into_view()}>
+        <Router>
         <div class="app">
                 <header>
                     <nav>
@@ -53,13 +69,13 @@ pub fn App() -> impl IntoView {
                 </header>
 
                 <main>
-                    <Routes>
-                        <Route path="" view=|| view! { <Home/> }/>
-                        <Route path="projects" view=|| view! { <Projects/> }/>
-                        <Route path="blog" view=|| view! { <Blog/> }/>
+                    <Routes fallback=move || {view!{ <NotFound />}.into_view()}>
+                        <Route path=path!("/") view=Home />
+                        <Route path=path!("/projects") view=Projects />
+                        <Route path=path!("/blog") view=Blog />
                         <Route
-                            path="/blog/:id"
-                            view=|| view! { <BlogPost/> }
+                            path=path!("/blog/:id")
+                            view=BlogPost
                             ssr=leptos_router::SsrMode::Async
                         />
                     </Routes>
@@ -67,12 +83,12 @@ pub fn App() -> impl IntoView {
                 <footer>
                     <ul>
                         <li>
-                            <a href="https://github.com/Fyssion" target="_blank">
+                            <a rel="external" href="https://github.com/Fyssion" target="_blank">
                                 <img src="/github.svg" />"Fyssion"
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/calebthamilton/" target="_blank">
+                            <a rel="external" href="https://www.linkedin.com/in/calebthamilton/" target="_blank">
                             <img src="/linkedin.svg" />"calebthamilton"
                         </a>
                         </li>

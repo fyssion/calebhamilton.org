@@ -1,7 +1,7 @@
 use cfg_if::cfg_if;
 use comrak::{ComrakExtensionOptions, ComrakOptions};
 use lazy_static::lazy_static;
-use leptos::*;
+use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
 
 lazy_static! {
