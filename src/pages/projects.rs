@@ -7,6 +7,7 @@ pub fn Project(
     children: Children,
     name: &'static str,
     timeframe: &'static str,
+    id: &'static str,
     #[prop(optional)] github: &'static str,
     #[prop(optional)] image: &'static str,
 ) -> impl IntoView {
@@ -30,7 +31,7 @@ pub fn Project(
     };
 
     view! {
-        <li>
+        <li id={id}>
             <div class="project-cover-wrapper">
                 {cover_image}
             </div>
@@ -52,7 +53,7 @@ pub fn Projects() -> impl IntoView {
         <PageMeta title="Projects - Caleb Hamilton" description="Caleb's projects" />
 
         <h1>"Projects"</h1>
-        <p>"These are some of my favorite projects over the years."</p>
+        <p>"These are some of my favorite projects from over the years."</p>
 
         <ul class="projects-list">
             <Project
@@ -60,6 +61,7 @@ pub fn Projects() -> impl IntoView {
                 timeframe="2023 \u{2013} present"
                 github="Fyssion/calebhamilton.org"
                 image="/blog.webp"
+                id="this-site"
             >
                 <p>
                     "This website was created as a markdown blogging engine in Rust. "
@@ -79,6 +81,7 @@ pub fn Projects() -> impl IntoView {
                 timeframe="2021 \u{2013} 2023"
                 github="Fyssion/zupplin"
                 image="/zupplin.webp"
+                id="zupplin"
             >
                 <p>
                     "Zupplin was a toy chat server I made for fun. "
@@ -96,6 +99,7 @@ pub fn Projects() -> impl IntoView {
                 timeframe="2019 \u{2013} 2022"
                 github="Fyssion/Clam"
                 image="/clam.webp"
+                id="clam"
             >
                 <p>
                     "Clam was a Discord bot written in Python that interacted with the Discord API. "

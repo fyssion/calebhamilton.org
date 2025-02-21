@@ -14,7 +14,8 @@ pub fn Home() -> impl IntoView {
             "I'm currently a student at the University of Wisconsin - Madison "
             "studying computer science, but my passion for creating software long precedes "
             "my university studies. Starting with Python in middle school, I've enjoyed teaching myself "
-            "how to use a wide range of programming languages and technologies throughout the years."
+            "how to use a wide range of programming languages and technologies throughout the years. "
+            "For example, this website is a "<A href="/projects#this-site">"full-stack Rust web app"</A>"."
         </p>
         <p>
             "You can find some of my favorite projects on my "
