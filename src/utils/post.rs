@@ -1,12 +1,12 @@
 use cfg_if::cfg_if;
-use comrak::{ComrakExtensionOptions, ComrakOptions};
+use comrak::{ExtensionOptions, Options};
 use lazy_static::lazy_static;
 use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
 
 lazy_static! {
-    static ref COMRAK_OPTIONS: ComrakOptions = ComrakOptions {
-        extension: ComrakExtensionOptions {
+    static ref COMRAK_OPTIONS: Options<'static> = Options {
+        extension: ExtensionOptions {
             strikethrough: true,
             table: true,
             autolink: true,
@@ -116,15 +116,15 @@ if #[cfg(feature = "ssr")] {
             let root = comrak::parse_document(&arena, content, &COMRAK_OPTIONS);
 
             let front_matter = traverse(root).find_map(|node| match node.data.borrow().value {
-                comrak::nodes::NodeValue::FrontMatter(ref bytes) => Some(String::from_utf8_lossy(bytes).into_owned()),
+                comrak::nodes::NodeValue::FrontMatter(ref s) => Some(s.clone()),
                 _ => None,
             });
 
             let counter = traverse(root)
                 .map(|node| match node.data.borrow().value {
-                    comrak::nodes::NodeValue::Text(ref bytes) => PostCounter::from_string(String::from_utf8_lossy(bytes).into_owned()),
-                    comrak::nodes::NodeValue::Code(ref code) => PostCounter::from_string(String::from_utf8(code.literal.clone()).expect("a valid utf-8 string")),
-                    comrak::nodes::NodeValue::CodeBlock(ref code) => PostCounter::from_string(String::from_utf8(code.literal.clone()).expect("a valid utf-8 string")),
+                    comrak::nodes::NodeValue::Text(ref s) => PostCounter::from_string(s.clone()),
+                    comrak::nodes::NodeValue::Code(ref code) => PostCounter::from_string(code.literal.clone()),
+                    comrak::nodes::NodeValue::CodeBlock(ref code) => PostCounter::from_string(code.literal.clone()),
                     _ => PostCounter::empty(),
                 })
                 .reduce(|acc, e| acc + e)
