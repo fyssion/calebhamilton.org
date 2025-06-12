@@ -22,7 +22,7 @@ pub fn Home() -> impl IntoView {
             ", see what I've been thinking about on "
             <A href="/blog">"my blog"</A>
             ", or browse all my public work on my "
-            <a rel="external" href="https://github.com/Fyssion">"GitHub"</a>"."
+            <a rel="external" href="https://github.com/chmltn">"GitHub"</a>"."
         </p>
     }
 }

@@ -83,8 +83,8 @@ pub fn App() -> impl IntoView {
                 <footer>
                     <ul>
                         <li>
-                            <a rel="external" href="https://github.com/Fyssion" target="_blank">
-                                <img src="/github.svg" />"Fyssion"
+                            <a rel="external" href="https://github.com/chmltn" target="_blank">
+                                <img src="/github.svg" />"chmltn"
                             </a>
                         </li>
                         <li>

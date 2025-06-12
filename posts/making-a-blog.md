@@ -39,7 +39,7 @@ use leptos::*;
 pub fn App(cx: Scope) -> impl IntoView {
     view! { cx,
         <h1>"Welcome"</h1>
-        <p>"I'm Fyssion. I enjoy writing software."</p>
+        <p>"I'm Caleb. I enjoy writing software."</p>
     }
 }
 ```
@@ -160,7 +160,7 @@ A Jekyll post looks something like this:
 layout: post
 title:  "My post"
 date:   2023-03-15 00:00:00 +0000
-author: Fyssion
+author: Caleb
 permalink: my-post
 ---
 

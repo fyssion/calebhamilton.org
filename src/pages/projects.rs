@@ -59,7 +59,7 @@ pub fn Projects() -> impl IntoView {
             <Project
                 name="This site"
                 timeframe="2023 \u{2013} present"
-                github="Fyssion/calebhamilton.org"
+                github="chmltn/site"
                 image="/blog.webp"
                 id="this-site"
             >
@@ -79,7 +79,7 @@ pub fn Projects() -> impl IntoView {
             <Project
                 name="Zupplin"
                 timeframe="2021 \u{2013} 2023"
-                github="Fyssion/zupplin"
+                github="chmltn/zupplin"
                 image="/zupplin.webp"
                 id="zupplin"
             >
@@ -97,7 +97,7 @@ pub fn Projects() -> impl IntoView {
             <Project
                 name="Clam"
                 timeframe="2019 \u{2013} 2022"
-                github="Fyssion/Clam"
+                github="chmltn/Clam"
                 image="/clam.webp"
                 id="clam"
             >

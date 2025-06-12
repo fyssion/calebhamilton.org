@@ -15,9 +15,9 @@ cfg_if! {
             .link("https://calebhamilton.org/blog/")
             .description("Thoughts and reflections without thinking or reflecting")
             .language(Some("en-us".to_owned()))
-            .copyright(Some("Copyright 2023-present Fyssion".to_owned()))
-            .managing_editor(Some("fyssioncodes@gmail.com (Fyssion)".to_owned()))
-            .webmaster(Some("fyssioncodes@gmail.com (Fyssion)".to_owned()))
+            .copyright(Some("Copyright 2023-present Caleb Hamilton".to_owned()))
+            .managing_editor(Some("me@calebhamilton.org (Caleb Hamilton)".to_owned()))
+            .webmaster(Some("me@calebhamilton.org (Caleb Hamilton)".to_owned()))
             .items(
                 posts.iter()
                     .filter(|p| p.hidden == false)
@@ -26,7 +26,7 @@ cfg_if! {
                             .title(Some(p.title.to_owned()))
                             .link(Some(format!("https://calebhamilton.org/blog/{}/", p.id.to_owned()).to_owned()))
                             .description(Some(p.description.to_owned()))
-                            .author(Some("fyssioncodes@gmail.com (Fyssion)".to_owned()))
+                            .author(Some("me@calebhamilton.org (Caleb Hamilton)".to_owned()))
                             .guid(
                                 GuidBuilder::default()
                                     .value(format!("https://calebhamilton.org/blog/post/{}/", p.id.to_owned()).to_owned())
